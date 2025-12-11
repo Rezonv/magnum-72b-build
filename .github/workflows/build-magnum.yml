@@ -10,9 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       # 1. MAGIC STEP: Free up disk space
       # GitHub Runners have ~14GB free by default. 
       # This step deletes Android SDKs, Dotnet, etc. to free up ~70GB.
@@ -27,6 +24,9 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Check Disk Space
         run: df -h
 
