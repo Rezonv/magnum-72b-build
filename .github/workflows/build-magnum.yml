@@ -3,8 +3,7 @@ name: Build and Push Magnum 72B
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'Dockerfile'
+  workflow_dispatch:
 
 jobs:
   build:
