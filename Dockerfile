@@ -22,4 +22,4 @@ ENV MODEL=/model/magnum-v4-72b-awq
 ENV SERVED_MODEL_NAME=magnum-v4-72b-awq
 
 # 啟動指令
-ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server", "--model", "/model/magnum-v4-72b-awq"]
+ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server", "--model", "/model/magnum-v4-72b-awq", "--cors-allow-origins", "*"]
