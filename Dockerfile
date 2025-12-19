@@ -22,4 +22,11 @@ ENV MODEL=/model/magnum-v4-72b-awq
 ENV SERVED_MODEL_NAME=magnum-v4-72b-awq
 
 # 啟動指令
-ENTRYPOINT ["python3", "-m", "vllm.entrypoints.openai.api_server", "--model", "/model/magnum-v4-72b-awq"]
+# 安裝 RunPod Worker 依賴
+RUN pip install runpod requests
+
+# 複製 Worker Adapter
+COPY runpod_wrapper.py /app/runpod_wrapper.py
+
+# 啟動指令 (改用 Adapter)
+ENTRYPOINT ["python3", "/app/runpod_wrapper.py"]
