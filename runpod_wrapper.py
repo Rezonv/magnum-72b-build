@@ -61,6 +61,11 @@ def handler(job):
     # RunPod input usually looks like: { "method": "POST", "body": { ... } } or just the body
     # We assume the input IS the body (openai payload)
     
+    # RunPod OpenAI Endpoint wrapping handling
+    # When using the /openai/v1 endpoint, RunPod wraps the body in "openai_input"
+    if "openai_input" in job_input:
+        job_input = job_input["openai_input"]
+    
     endpoint = f"{BASE_URL}/chat/completions"
     
     try:
