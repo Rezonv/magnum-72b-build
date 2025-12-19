@@ -65,6 +65,8 @@ def handler(job):
     
     try:
         print(f"Processing job: {job.get('id')}")
+        print(f"Payload received: {job_input}")  # DEBUG: Print payload
+        
         response = requests.post(
             endpoint,
             headers={"Content-Type": "application/json"},
@@ -73,6 +75,7 @@ def handler(job):
         )
         
         if response.status_code != 200:
+            print(f"vLLM Error Response: {response.text}") # DEBUG: Print error detail
             return {"error": f"vLLM Error {response.status_code}: {response.text}"}
             
         return response.json()
