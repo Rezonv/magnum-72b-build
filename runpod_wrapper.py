@@ -35,7 +35,7 @@ def start_vllm():
         "--port", str(VLLM_PORT),
         "--trust-remote-code",
         "--max-model-len", "16384", # Safety limit for A100 80GB just in case, or remove if confident
-        "--gpu-memory-utilization", "0.95"
+        "--gpu-memory-utilization", os.environ.get("GPU_MEMORY_UTILIZATION", "0.95")
     ]
     
     print(f"Starting vLLM: {' '.join(cmd)}")
