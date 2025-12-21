@@ -83,7 +83,15 @@ def handler(job):
             print(f"vLLM Error Response: {response.text}") # DEBUG: Print error detail
             return {"error": f"vLLM Error {response.status_code}: {response.text}"}
             
-        return response.json()
+        # Success Case - Log the response for debugging 500 errors
+        response_text = response.text
+        print(f"vLLM Success Response (First 500 chars): {response_text[:500]}")
+        
+        try:
+            return response.json()
+        except Exception as json_err:
+            print(f"JSON Parsing Error: {json_err}. Response content: {response_text}")
+            return {"error": f"JSON Parsing Error: {str(json_err)}"}
         
     except Exception as e:
         return {"error": str(e)}
